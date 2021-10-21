@@ -1,0 +1,17 @@
+<ng-container *ngIf="party$ | async as party">
+  <h1 class="mat-title">{{ party.name }}</h1>
+  <h2 class="mat-subheader">{{ party.description }}</h2>
+  <h3 class="mat-subheading-1">Convidados</h3>
+  <ul>
+    <li *ngFor="let g of party.guests">
+      {{ g.name }}
+      {{
+        g.willAttend === "yes"
+          ? "aceitou o convite!"
+          : g.willAttend === "maybe"
+          ? "talvez irá aparecer"
+          : "ainda não respondeu"
+      }}
+    </li>
+  </ul>
+</ng-container>

@@ -1,0 +1,72 @@
+<h1 class="mat-title">Nova festa</h1>
+<form [formGroup]="form" fxLayout="column" (ngSubmit)="submit()">
+  <mat-form-field>
+    <mat-label>Nome da festa</mat-label>
+    <input
+      matInput
+      formControlName="name"
+      placeholder="Aniversário do Pedrinho"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Descrição</mat-label>
+    <input
+      matInput
+      formControlName="description"
+      placeholder="Festa infantil acontecerá na casa de Yuri"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Mensagem do convite</mat-label>
+    <textarea
+      matInput
+      formControlName="invitationMessage"
+      placeholder="Olá, você está convidado para a festa do Pedrinho na casa de Yuri no dia 14 de julho às 14:00!"
+      rows="5"
+    ></textarea>
+    <mat-hint
+      >Esta mensagem será enviada para cada convidado por email.
+    </mat-hint>
+  </mat-form-field>
+
+  <h2 class="mat-subheader">Convidados</h2>
+  <div formArrayName="guests">
+    <div
+      *ngFor="let g of guests.controls; let i = index"
+      [formGroupName]="i"
+      fxLayout="row"
+    >
+      <mat-form-field fxFlex="35">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" placeholder="Joãozinho" />
+      </mat-form-field>
+
+      <mat-form-field fxFlex="">
+        <mat-label>E-mail</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          placeholder="joaozinho@gmail.com"
+        />
+      </mat-form-field>
+
+      <div fxFlex="none">
+        <button type="button" fxFlex="none" mat-icon-button (click)="removeGuest(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div fxLayoutAlign="end">
+    <button type="button" mat-icon-button (click)="newGuest()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <hr />
+  <div fxLayoutAlign="end">
+    <button mat-flat-button color="primary">Adicionar</button>
+  </div>
+</form>
